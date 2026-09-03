@@ -4,7 +4,6 @@ import {
   ArrowRight, Briefcase, Building2, Calendar, ChevronLeft, ChevronRight,
   Mail, MapPin, Phone, Send, ShieldCheck, TrendingUp, Users
 } from 'lucide-react';
-import './contact.css';
 import './contact-v2.css';
 
 const CONTACT_EMAIL = 'hello@antellay-x.com';
@@ -163,7 +162,7 @@ export default function ContactPage() {
         </div>
 
         <div className="contact-hero-art" aria-hidden="true">
-          <img src="/assets/contact/contact_hero_crop.png" alt="" loading="eager" />
+          <img src="/assets/contact/contact_hero_crop.webp" alt="" loading="eager" />
         </div>
       </section>
 
@@ -282,7 +281,7 @@ export default function ContactPage() {
           <h2 className="sr-only">Our Offices - Global Presence. Local Impact.</h2>
           <div className="contact-offices-banner-card">
             <img 
-              src="/assets/contact/contact-offices-ss2.png" 
+              src="/assets/contact/contact-offices-ss2.webp" 
               alt="Our Offices - Global Presence. Local Impact. Antellay-X operates across key global locations." 
               className="contact-offices-banner-img"
               loading="lazy"

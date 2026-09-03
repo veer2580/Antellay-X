@@ -15,11 +15,11 @@ const FRONTIER_POINTS = [
 ];
 
 const BUILD_CARDS = [
-  { title: 'Humanoid', desc: 'Intelligent humanoid robots for real-world tasks.', image: '/assets/about/about-build-humanoid.png', route: '/robots' },
-  { title: 'Land', desc: 'Autonomous ground vehicles for complex terrains.', image: '/assets/about/about-build-land.png', route: '/robots' },
-  { title: 'Air', desc: 'Autonomous aerial systems for surveillance and logistics.', image: '/assets/about/about-build-air.png', route: '/robots' },
-  { title: 'Sea', desc: 'Intelligent marine systems for exploration and monitoring.', image: '/assets/about/about-build-sea.png', route: '/robots' },
-  { title: 'Space', desc: 'Autonomous space technologies for a bigger future.', image: '/assets/about/about-build-space.png', route: '/robots' }
+  { title: 'Humanoid', desc: 'Intelligent humanoid robots for real-world tasks.', image: '/assets/about/about-build-humanoid.webp', route: '/robots' },
+  { title: 'Land', desc: 'Autonomous ground vehicles for complex terrains.', image: '/assets/about/about-build-land.webp', route: '/robots' },
+  { title: 'Air', desc: 'Autonomous aerial systems for surveillance and logistics.', image: '/assets/about/about-build-air.webp', route: '/robots' },
+  { title: 'Sea', desc: 'Intelligent marine systems for exploration and monitoring.', image: '/assets/about/about-build-sea.webp', route: '/robots' },
+  { title: 'Space', desc: 'Autonomous space technologies for a bigger future.', image: '/assets/about/about-build-space.webp', route: '/robots' }
 ];
 
 const APPROACH_STEPS = [
@@ -29,11 +29,11 @@ const APPROACH_STEPS = [
 ];
 
 const REACH_ITEMS = [
-  { label: 'Humanoid', image: '/assets/about/about-build-humanoid.png' },
-  { label: 'Land', image: '/assets/about/about-build-land.png' },
-  { label: 'Air', image: '/assets/about/about-build-air.png' },
-  { label: 'Sea', image: '/assets/about/about-build-sea.png' },
-  { label: 'Space', image: '/assets/about/about-build-space.png' }
+  { label: 'Humanoid', image: '/assets/about/about-build-humanoid.webp' },
+  { label: 'Land', image: '/assets/about/about-build-land.webp' },
+  { label: 'Air', image: '/assets/about/about-build-air.webp' },
+  { label: 'Sea', image: '/assets/about/about-build-sea.webp' },
+  { label: 'Space', image: '/assets/about/about-build-space.webp' }
 ];
 
 export default function AboutPage() {
@@ -106,7 +106,7 @@ export default function AboutPage() {
               </h2>
               <p>We combine advanced perception, intelligent decision-making, and adaptive systems to solve real-world challenges with precision.</p>
             </div>
-            <img src="/assets/about/about-cube-clear.png" alt="Antellay-X intelligence cube" />
+            <img src="/assets/about/about-cube-clear.webp" alt="Antellay-X intelligence cube" />
             <div className="approach-steps">
               {APPROACH_STEPS.map((step) => {
                 const Icon = step.icon;
@@ -152,7 +152,7 @@ export default function AboutPage() {
       <section className="about-section about-founder-wrap">
         <div className="about-standard-container">
           <div className="about-founder-v2">
-            <img src="/assets/about/about-founder-card.png" alt="Veer Singh, founder of Antellay-X" />
+            <img src="/assets/about/about-founder-card.webp" alt="Veer Singh, founder of Antellay-X" />
             <div>
               <span className="about-v2-tag">Founder</span>
               <h2>The Vision Behind Antellay-X</h2>
@@ -175,7 +175,7 @@ export default function AboutPage() {
           <h2 className="sr-only">Our Vision - One Intelligence. Every Environment.</h2>
           <div className="vision-banner-card" onClick={() => navigate('/vision')} role="button" tabIndex={0}>
             <img 
-              src="/assets/about/about-vision-ss4.png" 
+              src="/assets/about/about-vision-ss4.webp" 
               alt="Our Vision - One Intelligence. Every Environment. Unified intelligence layer for autonomous machines." 
               className="vision-banner-image"
               loading="lazy"
