@@ -905,7 +905,7 @@ function HomePage({ onOpenVideo, onOpenDetail, onOpenContact }) {
       {/* SECTION 1: HERO */}
       <section className="landing-sec sec-hero reveal-item reveal-visible" aria-label="Hero Section">
         <img
-          src="/assets/landing/sec1_hero.webp"
+          src="/assets/landing/sec1_hero_v2.webp"
           alt="Antellay-X Humanoid Robot"
           className="landing-sec-img"
           loading="eager"
@@ -947,7 +947,7 @@ function HomePage({ onOpenVideo, onOpenDetail, onOpenContact }) {
       {/* SECTION 2: ONE INTELLIGENCE. EVERY ENVIRONMENT. */}
       <section className="landing-sec sec-environments reveal-item" aria-label="Environments Fleet">
         <img
-          src="/assets/landing/sec2_environments.webp"
+          src="/assets/landing/sec2_environments_v2.webp"
           alt="Antellay-X Fleet Across Earth and Space"
           className="landing-sec-img"
           loading="lazy"
@@ -1017,7 +1017,7 @@ function HomePage({ onOpenVideo, onOpenDetail, onOpenContact }) {
       <section className="landing-sec landing-halo-banner reveal-item" aria-label="Halo Robot Showcase">
         <div className="halo-glow-ambient" aria-hidden="true" />
         <img
-          src="/assets/landing/halo_robot_banner.webp"
+          src="/assets/landing/halo_robot_banner_v2.webp"
           alt="Antellay-X Halo Robot"
           className="landing-sec-img"
           loading="lazy"
@@ -1035,7 +1035,7 @@ function HomePage({ onOpenVideo, onOpenDetail, onOpenContact }) {
       {/* SECTION 4: BUILT TO UNDERSTAND THE PHYSICAL WORLD (CUBE) */}
       <section className="landing-sec sec-cube reveal-item" aria-label="Neural Intelligence Cube">
         <img
-          src="/assets/landing/sec3_cube.webp"
+          src="/assets/landing/sec3_cube_v2.webp"
           alt="Antellay-X Neural Compute Cube"
           className="landing-sec-img"
           loading="lazy"
@@ -1062,7 +1062,7 @@ function HomePage({ onOpenVideo, onOpenDetail, onOpenContact }) {
       {/* SECTION 5: DESIGNED WITHOUT COMPROMISE */}
       <section className="landing-sec sec-compromise reveal-item" aria-label="Robotics Design Without Compromise">
         <img
-          src="/assets/landing/sec4_compromise.webp"
+          src="/assets/landing/sec4_compromise_v2.webp"
           alt="Antellay-X Bionic Humanoid Chassis"
           className="landing-sec-img"
           loading="lazy"
@@ -1103,7 +1103,7 @@ function HomePage({ onOpenVideo, onOpenDetail, onOpenContact }) {
       {/* SECTION 6: BUILT FOR THE REAL WORLD (FACTORY) */}
       <section className="landing-sec sec-factory reveal-item" aria-label="Industrial Assembly & Automation">
         <img
-          src="/assets/landing/sec5_factory.webp"
+          src="/assets/landing/sec5_factory_v2.webp"
           alt="Antellay-X Robot in Manufacturing Factory"
           className="landing-sec-img"
           loading="lazy"
@@ -1130,7 +1130,7 @@ function HomePage({ onOpenVideo, onOpenDetail, onOpenContact }) {
       {/* SECTION 7: ONE INTELLIGENCE. INFINITE POSSIBILITIES. (GLOBE) */}
       <section className="landing-sec sec-globe reveal-item" aria-label="Global Planetary Intelligence">
         <img
-          src="/assets/landing/sec6_globe.webp"
+          src="/assets/landing/sec6_globe_v2.webp"
           alt="Connected Autonomous Mesh Across Earth"
           className="landing-sec-img"
           loading="lazy"
@@ -1157,7 +1157,7 @@ function HomePage({ onOpenVideo, onOpenDetail, onOpenContact }) {
       {/* SECTION 8: THE FUTURE IS PHYSICAL (DUBAI SKYLINE) */}
       <section className="landing-sec sec-dubai reveal-item" aria-label="Physical Intelligence Vision">
         <img
-          src="/assets/landing/sec7_dubai.webp"
+          src="/assets/landing/sec7_dubai_v2.webp"
           alt="Antellay-X Robot Standing in Futuristic City at Sunset"
           className="landing-sec-img"
           loading="lazy"

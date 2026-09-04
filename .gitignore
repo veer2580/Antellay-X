@@ -12,6 +12,7 @@ build/
 .vite/
 .cache/
 .wrangler/
+scratch/
 
 # Environment variables & secrets
 .env

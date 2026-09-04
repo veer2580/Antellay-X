@@ -1,6 +1,16 @@
-# Static assets cache
-/assets/*
+# Static hashed assets built by Vite (e.g. JS & CSS bundles with content hash)
+/assets/index-*
   Cache-Control: public, max-age=31536000, immutable
+
+# Static images in public/assets (must revalidate so changes reflect immediately)
+/assets/landing/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/vision/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/mission/*
+  Cache-Control: public, max-age=0, must-revalidate
 
 # Favicon assets
 /favicon*
