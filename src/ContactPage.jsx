@@ -6,16 +6,16 @@ import {
 } from 'lucide-react';
 import './contact-v2.css';
 
-const CONTACT_EMAIL = 'hello@antellay-x.com';
-const CONTACT_PHONE = '+91 98765 43210';
+const CONTACT_EMAIL = 'Space.antellay@gmail.com';
+const CONTACT_PHONE = '+91 97846 26443';
 
 const TIME_SLOTS = ['10:00 AM', '11:00 AM', '01:00 PM', '02:00 PM', '03:00 PM', '04:00 PM', '05:00 PM'];
 
 const CONNECT_LINKS = [
-  { icon: Users, title: 'General Inquiries', email: 'info@antellay-x.com' },
-  { icon: Building2, title: 'Partnerships', email: 'partners@antellay-x.com' },
-  { icon: TrendingUp, title: 'Investors', email: 'investors@antellay-x.com' },
-  { icon: Briefcase, title: 'Careers', email: 'careers@antellay-x.com' }
+  { icon: Users, title: 'General Inquiries', email: 'Space.antellay@gmail.com' },
+  { icon: Building2, title: 'Partnerships', email: 'Space.antellay@gmail.com' },
+  { icon: TrendingUp, title: 'Investors', email: 'Space.antellay@gmail.com' },
+  { icon: Briefcase, title: 'Careers', email: 'Space.antellay@gmail.com' }
 ];
 
 const OFFICES = [
@@ -105,21 +105,48 @@ export default function ContactPage() {
     window.scrollTo(0, 0);
   }, []);
 
-  const submitForm = (event) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const submitForm = async (event) => {
     event.preventDefault();
-    setSubmitted(true);
-    window.setTimeout(() => {
-      setSubmitted(false);
-      setFormData({
-        fullName: '',
-        email: '',
-        company: '',
-        phone: '',
-        subject: '',
-        message: '',
-        agree: false
+    setIsSubmitting(true);
+
+    try {
+      await fetch('https://formsubmit.co/ajax/Space.antellay@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          Name: formData.fullName,
+          Email: formData.email,
+          Company: formData.company || 'N/A',
+          Phone: formData.phone || 'N/A',
+          Subject: formData.subject,
+          Message: formData.message,
+          _subject: `New Antellay-X Contact Message: ${formData.subject} (from ${formData.fullName})`,
+          _template: 'table'
+        })
       });
-    }, 3000);
+    } catch (err) {
+      console.warn('FormSubmit network notice:', err);
+    } finally {
+      setIsSubmitting(false);
+      setSubmitted(true);
+      window.setTimeout(() => {
+        setSubmitted(false);
+        setFormData({
+          fullName: '',
+          email: '',
+          company: '',
+          phone: '',
+          subject: '',
+          message: '',
+          agree: false
+        });
+      }, 3500);
+    }
   };
 
   const changeMonth = (direction) => {
@@ -194,8 +221,8 @@ export default function ContactPage() {
                 <input required type="checkbox" checked={formData.agree} onChange={(e) => setFormData({ ...formData, agree: e.target.checked })} />
                 <span>I agree to the <Link to="/privacy">Privacy Policy</Link> and <Link to="/terms">Terms of Use</Link>.</span>
               </label>
-              <button type="submit" className="contact-black-btn">
-                <Send size={14} /> SEND MESSAGE
+              <button type="submit" className="contact-black-btn" disabled={isSubmitting}>
+                <Send size={14} /> {isSubmitting ? 'SENDING...' : 'SEND MESSAGE'}
               </button>
             </form>
           )}
@@ -276,20 +303,6 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="contact-offices-banner-section" aria-label="Our Offices">
-        <div className="contact-offices-banner-container">
-          <h2 className="sr-only">Our Offices - Global Presence. Local Impact.</h2>
-          <div className="contact-offices-banner-card">
-            <img 
-              src="/assets/contact/contact-offices-ss2.webp" 
-              alt="Our Offices - Global Presence. Local Impact. Antellay-X operates across key global locations." 
-              className="contact-offices-banner-img"
-              loading="lazy"
-            />
-          </div>
-        </div>
-      </section>
-
       <section className="contact-dark-cta">
         <div>
           <h2>
@@ -304,23 +317,6 @@ export default function ContactPage() {
         <img src="/assets/contact/contact_banner_robot.webp" alt="" aria-hidden="true" />
       </section>
 
-      <footer className="contact-footer">
-        <Link to="/" className="contact-footer-brand">
-          ANTELLAY - <span>X</span>
-          <small>INTELLIGENT ROBOTICS. LIMITLESS FUTURE.</small>
-        </Link>
-        <nav>
-          {QUICK_LINKS.map(([label, path]) => (
-            <Link key={path} to={path}>{label}</Link>
-          ))}
-        </nav>
-        <div className="contact-socials">
-          <a href="https://x.com" target="_blank" rel="noreferrer" aria-label="Antellay-X on X">X</a>
-          <a href="https://www.linkedin.com" target="_blank" rel="noreferrer" aria-label="Antellay-X on LinkedIn">in</a>
-          <a href="https://www.youtube.com" target="_blank" rel="noreferrer" aria-label="Antellay-X on YouTube">▶</a>
-        </div>
-        <p>© 2026 Antellay-X Technologies Pvt. Ltd. All rights reserved.</p>
-      </footer>
     </div>
   );
 }

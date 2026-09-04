@@ -101,20 +101,6 @@ export default function CompanyPage({ onOpenContact }) {
         </div>
       </section>
 
-      <footer className="company-live-footer">
-        <Link className="company-footer-brand" to="/">ANTELLAY-<span>X</span></Link>
-        <nav aria-label="Company footer links">
-          <button onClick={onOpenContact}>CAREERS</button>
-          <button onClick={onOpenContact}>NEWS</button>
-          <button onClick={onOpenContact}>INVESTORS</button>
-          <button onClick={onOpenContact}>CONTACT</button>
-        </nav>
-        <div className="company-footer-socials">
-          <button onClick={onOpenContact} aria-label="X social profile">𝕏</button>
-          <button onClick={onOpenContact} aria-label="LinkedIn profile">in</button>
-          <button onClick={onOpenContact} aria-label="YouTube channel">▶</button>
-        </div>
-      </footer>
     </main>
   );
 }

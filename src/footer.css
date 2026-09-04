@@ -1,0 +1,423 @@
+/* ====================================================
+   EXPANDED MEGA FOOTER - ANTELLAY-X
+   ==================================================== */
+
+.site-mega-footer {
+  width: 100%;
+  background: #04070e;
+  color: #ffffff;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle background accent glow */
+.site-mega-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 25%;
+  width: 50%;
+  height: 250px;
+  background: radial-gradient(ellipse at top, rgba(38, 116, 255, 0.08) 0%, rgba(4, 7, 14, 0) 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.mega-footer-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 80px 6vw 36px 6vw;
+}
+
+/* ====================================================
+   1. NEWSLETTER / UPDATES STRIP
+   ==================================================== */
+.mega-footer-newsletter-box {
+  background: rgba(12, 18, 32, 0.7);
+  border: 1px solid rgba(38, 116, 255, 0.2);
+  border-radius: 16px;
+  padding: 36px 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+  margin-bottom: 70px;
+  backdrop-filter: blur(12px);
+}
+
+.mega-newsletter-info h4 {
+  font-family: var(--font-heading, 'Space Grotesk', sans-serif);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.mega-newsletter-info p {
+  font-size: 13px;
+  color: #94a3b8;
+  line-height: 1.5;
+  max-width: 520px;
+}
+
+.mega-newsletter-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 440px;
+}
+
+.mega-newsletter-input {
+  flex: 1;
+  padding: 13px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.mega-newsletter-input:focus {
+  border-color: #2674ff;
+  background: rgba(255, 255, 255, 0.09);
+  box-shadow: 0 0 16px rgba(38, 116, 255, 0.25);
+}
+
+.mega-newsletter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 24px;
+  border-radius: 999px;
+  background: #2674ff;
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.25s ease;
+}
+
+.mega-newsletter-btn:hover {
+  background: #1c5fd1;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(38, 116, 255, 0.4);
+}
+
+.mega-newsletter-success {
+  font-size: 13px;
+  color: #4ade80;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ====================================================
+   2. MAIN 5-COLUMN MEGA GRID
+   ==================================================== */
+.mega-footer-grid {
+  display: grid;
+  grid-template-columns: 1.6fr repeat(4, 1fr);
+  gap: 48px;
+  margin-bottom: 70px;
+}
+
+/* Brand Column */
+.mega-brand-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.mega-brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #ffffff;
+  text-decoration: none;
+  margin-bottom: 12px;
+}
+
+.mega-brand-logo .brand-x {
+  color: #2674ff;
+}
+
+.mega-brand-tagline {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  color: #2674ff;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.mega-brand-desc {
+  font-size: 13px;
+  line-height: 1.65;
+  color: #8899b5;
+  margin-bottom: 24px;
+  max-width: 320px;
+}
+
+.mega-brand-contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.mega-brand-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: #cbd5e1;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.mega-brand-contact-item:hover {
+  color: #2674ff;
+}
+
+.mega-brand-contact-item svg {
+  color: #2674ff;
+  flex-shrink: 0;
+}
+
+.mega-social-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mega-social-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.mega-social-btn:hover {
+  background: #2674ff;
+  color: #ffffff;
+  border-color: #2674ff;
+  transform: translateY(-2px);
+}
+
+/* Nav Columns */
+.mega-nav-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.mega-col-title {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.mega-col-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background: #2674ff;
+}
+
+.mega-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mega-nav-link {
+  font-size: 13px;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+}
+
+.mega-nav-link:hover {
+  color: #ffffff;
+  transform: translateX(3px);
+}
+
+.mega-nav-badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(38, 116, 255, 0.15);
+  color: #2674ff;
+  border: 1px solid rgba(38, 116, 255, 0.3);
+  text-transform: uppercase;
+}
+
+/* ====================================================
+   3. BOTTOM STATUS & COPYRIGHT BAR
+   ==================================================== */
+.mega-footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.mega-copyright {
+  color: #64748b;
+}
+
+.mega-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  color: #34d399;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.mega-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+}
+
+.mega-bottom-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.mega-bottom-links a,
+.mega-bottom-links button {
+  color: #8899b5;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: inherit;
+  transition: color 0.2s ease;
+}
+
+.mega-bottom-links a:hover,
+.mega-bottom-links button:hover {
+  color: #2674ff;
+}
+
+.mega-back-to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ====================================================
+   RESPONSIVE
+   ==================================================== */
+@media (max-width: 1100px) {
+  .mega-footer-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+  }
+  .mega-brand-col {
+    grid-column: span 3;
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 800px) {
+  .mega-footer-newsletter-box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .mega-newsletter-form {
+    max-width: 100%;
+  }
+  .mega-footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .mega-brand-col {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 520px) {
+  .mega-footer-grid {
+    grid-template-columns: 1fr;
+  }
+  .mega-brand-col {
+    grid-column: span 1;
+  }
+  .mega-newsletter-form {
+    flex-direction: column;
+  }
+  .mega-newsletter-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .mega-footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+}

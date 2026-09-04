@@ -232,23 +232,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 9. Footer */}
-      <footer className="about-footer-v2-wrap">
-        <div className="about-standard-container">
-          <div className="about-footer-v2">
-            <Link to="/" className="about-footer-brand">ANTELLAY-<strong>X</strong></Link>
-            <nav>
-              <Link to="/vision">Vision</Link>
-              <Link to="/technology">Technology</Link>
-              <Link to="/robots">Robots</Link>
-              <Link to="/ecosystem">Ecosystem</Link>
-              <Link to="/company">Company</Link>
-              <Link to="/contact">Contact</Link>
-            </nav>
-            <Link to="/contact" className="about-footer-cta">Start A Conversation <ArrowRight size={15} /></Link>
-          </div>
-        </div>
-      </footer>
     </main>
   );
 }

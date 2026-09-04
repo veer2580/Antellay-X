@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="153 241 695 542" fill="none">
+  <defs>
+    <!-- Subtle drop-shadow so white logo remains visible even on pure white browser tabs -->
+    <filter id="tab-contrast" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="1" stdDeviation="4" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  <style>
+    .antellay-x-glyph {
+      fill: #ffffff;
+      filter: url(#tab-contrast);
+      transition: fill 0.2s ease;
+    }
+    /* When browser tab is explicitly light mode, keep high contrast white with shadow or crisp brand tint */
+    @media (prefers-color-scheme: light) {
+      .antellay-x-glyph {
+        fill: #0c1017;
+        filter: none;
+      }
+    }
+    @media (prefers-color-scheme: dark) {
+      .antellay-x-glyph {
+        fill: #ffffff;
+        filter: url(#tab-contrast);
+      }
+    }
+  </style>
+  <g class="antellay-x-glyph">
+    <path d="M 808 749 L 582 497 L 502 565 L 294 751 L 351 751 L 543 585 L 691 749 Z" />
+    <path d="M 184 751 L 234 751 L 611 413 L 662 413 L 816 272 L 701 272 L 527 448 L 363 273 L 236 272 L 453 508 L 409 551 L 388 552 Z" />
+  </g>
+</svg>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
-import { 
+import {
   ArrowRight, X, Play, CheckCircle2, Target, Globe, User, Sparkles, ChevronRight,
   Brain, Cpu, Layers, ShieldCheck, Cloud, Sliders, Box, Activity, Lock, Share2,
   Radio, Wrench, RefreshCw, Eye
@@ -12,6 +12,8 @@ import EcosystemPage from './EcosystemPage';
 import AboutPage from './AboutPage';
 import ContactPage from './ContactPage';
 import LegalPage from './LegalPage';
+import MissionPage from './MissionPage';
+import SiteFooter from './SiteFooter';
 
 // Page configuration
 const PAGES = [
@@ -574,7 +576,7 @@ function TiltCard({ children, className = '', maxAngle = 12, glare = true, style
   };
 
   return (
-    <div 
+    <div
       ref={cardRef}
       className={`tilt-card-wrapper ${className}`}
       style={{ ...style, ...tiltStyle }}
@@ -634,15 +636,15 @@ function SS1Header({ onOpenDrawer }) {
         </nav>
 
         <div className="ss1-actions">
-          <Link 
-            to="/mission" 
+          <Link
+            to="/mission"
             className={`ss1-access-btn ${location.pathname === '/mission' ? 'active' : ''}`}
           >
             ACCESS <ArrowRight size={13} strokeWidth={2.5} />
           </Link>
 
-          <button 
-            className="ss1-menu-btn" 
+          <button
+            className="ss1-menu-btn"
             onClick={onOpenDrawer}
             aria-label="Open Navigation Menu"
           >
@@ -688,8 +690,8 @@ function NavDrawer({ isOpen, onClose, onOpenContact }) {
         </div>
 
         <div className="drawer-footer">
-          <button 
-            className="ss1-access-btn" 
+          <button
+            className="ss1-access-btn"
             style={{ width: '100%', justifyContent: 'center' }}
             onClick={() => { onClose(); onOpenContact(); }}
           >
@@ -724,7 +726,7 @@ function VideoModal({ isOpen, onClose, onNavigateMission }) {
         <h2>ANTELLAY-X / FILM</h2>
         <p>Autonomy, intelligence and robotics engineered for the physical world. One intelligence, every environment.</p>
 
-        <button 
+        <button
           className="modal-cta-btn"
           onClick={() => { onClose(); onNavigateMission(); }}
         >
@@ -761,7 +763,7 @@ function DetailModal({ data, onClose, onAction }) {
           </div>
         )}
 
-        <button 
+        <button
           className="modal-cta-btn"
           onClick={() => { onClose(); onAction(); }}
         >
@@ -775,17 +777,41 @@ function DetailModal({ data, onClose, onAction }) {
 // Contact Modal
 function ContactModal({ isOpen, onClose }) {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', company: '', message: '' });
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      onClose();
-    }, 2200);
+    setLoading(true);
+    try {
+      await fetch('https://formsubmit.co/ajax/Space.antellay@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          Name: formData.name,
+          Email: formData.email,
+          Company: formData.company || 'N/A',
+          Message: formData.message,
+          _subject: `New Antellay-X Access Inquiry from ${formData.name}`,
+          _template: 'table'
+        })
+      });
+    } catch (err) {
+      console.warn('Inquiry notice:', err);
+    } finally {
+      setLoading(false);
+      setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        setFormData({ name: '', email: '', company: '', message: '' });
+        onClose();
+      }, 2500);
+    }
   };
 
   return (
@@ -807,32 +833,32 @@ function ContactModal({ isOpen, onClose }) {
           </div>
         ) : (
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-            <input 
-              type="text" 
-              required 
-              placeholder="Your Full Name" 
+            <input
+              type="text"
+              required
+              placeholder="Your Full Name"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               style={{ padding: '12px 14px', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '6px', color: '#fff' }}
             />
-            <input 
-              type="email" 
-              required 
-              placeholder="Work Email" 
+            <input
+              type="email"
+              required
+              placeholder="Work Email"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               style={{ padding: '12px 14px', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '6px', color: '#fff' }}
             />
-            <input 
-              type="text" 
-              placeholder="Organization / Company" 
+            <input
+              type="text"
+              placeholder="Organization / Company"
               value={formData.company}
               onChange={(e) => setFormData({ ...formData, company: e.target.value })}
               style={{ padding: '12px 14px', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '6px', color: '#fff' }}
             />
-            <textarea 
-              rows={3} 
-              placeholder="How can we partner with you?" 
+            <textarea
+              rows={3}
+              placeholder="How can we partner with you?"
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               style={{ padding: '12px 14px', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '6px', color: '#fff' }}
@@ -851,199 +877,310 @@ function ContactModal({ isOpen, onClose }) {
 function HomePage({ onOpenVideo, onOpenDetail, onOpenContact }) {
   const navigate = useNavigate();
   useScrollReveal();
+  const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
+  const [activeStep, setActiveStep] = useState(0);
 
   useEffect(() => {
     document.title = 'ANTELLAY-X | Autonomy. Redefined.';
     window.scrollTo(0, 0);
   }, []);
 
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
   return (
-    <div className="landing-stage">
-      <div className="landing-sec">
-        <img 
-          src="/assets/landing/sec1_hero.webp" 
-          alt="Antellay-X Autonomy, Redefined" 
-          className="landing-sec-img" 
+    <div 
+      className="landing-stage"
+      onMouseMove={handleMouseMove}
+      style={{
+        '--mouse-x': `${mousePos.x}px`,
+        '--mouse-y': `${mousePos.y}px`
+      }}
+    >
+      {/* SECTION 1: HERO */}
+      <section className="landing-sec sec-hero reveal-item reveal-visible" aria-label="Hero Section">
+        <img
+          src="/assets/landing/sec1_hero.webp"
+          alt="Antellay-X Humanoid Robot"
+          className="landing-sec-img"
           loading="eager"
         />
-        <div className="hotspot-overlay">
-          <div 
-            className="hotspot pill" 
-            style={{ top: '61.5%', left: '8.4%', width: '15.6%', height: '6.5%' }}
-            onClick={() => navigate('/vision')}
-            title="Explore Antellay-X Vision"
-          >
-            <span className="hotspot-tooltip">EXPLORE VISION →</span>
+        <div className="landing-content-layer hero-layer">
+          <div className="hero-copy-box">
+            <h1 className="hero-brand-title">
+              A N T E L L A Y - <span className="brand-x">X</span>
+            </h1>
+            <p className="hero-tagline">AUTONOMY. REDEFINED.</p>
+            <div className="hero-btn-group">
+              <button
+                className="hero-btn-primary"
+                onClick={() => navigate('/vision')}
+                title="Explore Antellay-X Vision"
+              >
+                EXPLORE <ArrowRight size={15} />
+              </button>
+              <button
+                className="hero-btn-video"
+                onClick={onOpenVideo}
+                title="Watch Film"
+              >
+                <span>WATCH FILM</span>
+                <span className="play-icon-wrap"><Play size={13} fill="currentColor" /></span>
+              </button>
+            </div>
           </div>
-
-          <div 
-            className="hotspot pill" 
-            style={{ top: '61.5%', left: '25.2%', width: '15.2%', height: '6.5%' }}
-            onClick={onOpenVideo}
-            title="Watch Film"
-          >
-            <span className="hotspot-tooltip">WATCH FILM (▶)</span>
+          <div className="hero-scroll-indicator" aria-hidden="true">
+            <span className="scroll-label">SCROLL</span>
+            <div className="scroll-line-wrap">
+              <span className="scroll-dot" />
+              <span className="scroll-line" />
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="landing-sec">
-        <img 
-          src="/assets/landing/sec2_environments.webp" 
-          alt="One Intelligence. Every Environment." 
-          className="landing-sec-img" 
+      {/* SECTION 2: ONE INTELLIGENCE. EVERY ENVIRONMENT. */}
+      <section className="landing-sec sec-environments reveal-item" aria-label="Environments Fleet">
+        <img
+          src="/assets/landing/sec2_environments.webp"
+          alt="Antellay-X Fleet Across Earth and Space"
+          className="landing-sec-img"
+          loading="lazy"
         />
-        <div className="hotspot-overlay">
-          <div 
-            className="hotspot" 
-            style={{ top: '27%', left: '5.2%', width: '3.5%', height: '4%' }}
-            onClick={() => navigate('/robots')}
-          >
-            <span className="hotspot-tooltip">EXPLORE FLEET →</span>
+        <div className="landing-content-layer environments-layer">
+          <div className="env-header-box">
+            <h2>
+              ONE INTELLIGENCE.<br />
+              EVERY ENVIRONMENT.
+            </h2>
+            <div className="blue-accent-bar" />
+            <p>The world is our domain.</p>
+            <button
+              className="coded-arrow-btn env-cta"
+              onClick={() => navigate('/robots')}
+            >
+              EXPLORE FLEET <ArrowRight size={15} />
+            </button>
           </div>
 
-          <div 
-            className="hotspot" 
-            style={{ top: '48%', left: '5%', width: '15%', height: '42%' }}
-            onClick={() => onOpenDetail(ROBOT_DETAILS.humanoid)}
-          >
-            <span className="hotspot-tooltip">HUMANOID SPECS</span>
-          </div>
-          <div 
-            className="hotspot" 
-            style={{ top: '48%', left: '23%', width: '15%', height: '42%' }}
-            onClick={() => onOpenDetail(ROBOT_DETAILS.quadruped)}
-          >
-            <span className="hotspot-tooltip">LAND VEHICLE SPECS</span>
-          </div>
-          <div 
-            className="hotspot" 
-            style={{ top: '48%', left: '42%', width: '16%', height: '42%' }}
-            onClick={() => onOpenDetail(ROBOT_DETAILS.aerial)}
-          >
-            <span className="hotspot-tooltip">AIR ROBOT SPECS</span>
-          </div>
-          <div 
-            className="hotspot" 
-            style={{ top: '48%', left: '62%', width: '16%', height: '42%' }}
-            onClick={() => onOpenDetail(ROBOT_DETAILS.underwater)}
-          >
-            <span className="hotspot-tooltip">SEA ROBOT SPECS</span>
-          </div>
-          <div 
-            className="hotspot" 
-            style={{ top: '48%', left: '81%', width: '15%', height: '42%' }}
-            onClick={() => navigate('/robots')}
-          >
-            <span className="hotspot-tooltip">SPACE PLATFORM SPECS</span>
+          <div className="env-fleet-row">
+            <button
+              className="env-fleet-item"
+              onClick={() => onOpenDetail(ROBOT_DETAILS.humanoid)}
+              title="Inspect Humanoid Robot Specs"
+            >
+              <span className="fleet-item-label">HUMANOID</span>
+              <span className="fleet-specs-pill">SPECS →</span>
+            </button>
+            <button
+              className="env-fleet-item"
+              onClick={() => onOpenDetail(ROBOT_DETAILS.quadruped)}
+              title="Inspect Land Vehicle Specs"
+            >
+              <span className="fleet-item-label">LAND</span>
+              <span className="fleet-specs-pill">SPECS →</span>
+            </button>
+            <button
+              className="env-fleet-item"
+              onClick={() => onOpenDetail(ROBOT_DETAILS.aerial)}
+              title="Inspect Air Robot Specs"
+            >
+              <span className="fleet-item-label">AIR</span>
+              <span className="fleet-specs-pill">SPECS →</span>
+            </button>
+            <button
+              className="env-fleet-item"
+              onClick={() => onOpenDetail(ROBOT_DETAILS.underwater)}
+              title="Inspect Sea Robot Specs"
+            >
+              <span className="fleet-item-label">SEA</span>
+              <span className="fleet-specs-pill">SPECS →</span>
+            </button>
+            <button
+              className="env-fleet-item"
+              onClick={() => navigate('/robots')}
+              title="Explore Space Platform"
+            >
+              <span className="fleet-item-label">SPACE</span>
+              <span className="fleet-specs-pill">SPECS →</span>
+            </button>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="landing-sec">
-        <img 
-          src="/assets/landing/sec3_cube.webp" 
-          alt="Built to Understand the Physical World." 
-          className="landing-sec-img" 
+      {/* SECTION 3: HALO ROBOT BANNER */}
+      <section className="landing-sec landing-halo-banner reveal-item" aria-label="Halo Robot Showcase">
+        <div className="halo-glow-ambient" aria-hidden="true" />
+        <img
+          src="/assets/landing/halo_robot_banner.webp"
+          alt="Antellay-X Halo Robot"
+          className="landing-sec-img"
+          loading="lazy"
         />
-        <div className="hotspot-overlay">
-          <div 
-            className="hotspot" 
-            style={{ top: '56%', left: '3.8%', width: '4%', height: '5%' }}
-            onClick={() => navigate('/technology')}
-          >
-            <span className="hotspot-tooltip">DISCOVER TECHNOLOGY →</span>
+        <div className="landing-content-layer halo-layer">
+          <div className="halo-text-box">
+            <h2 className="halo-brand-title">
+              A N T E L L A Y - <span className="brand-x">X</span>
+            </h2>
+            <p className="halo-brand-sub">A U T O N O M Y .   R E D E F I N E D .</p>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="landing-sec">
-        <img 
-          src="/assets/landing/sec4_compromise.webp" 
-          alt="Designed Without Compromise." 
-          className="landing-sec-img" 
+      {/* SECTION 4: BUILT TO UNDERSTAND THE PHYSICAL WORLD (CUBE) */}
+      <section className="landing-sec sec-cube reveal-item" aria-label="Neural Intelligence Cube">
+        <img
+          src="/assets/landing/sec3_cube.webp"
+          alt="Antellay-X Neural Compute Cube"
+          className="landing-sec-img"
+          loading="lazy"
         />
-        <div className="hotspot-overlay">
-          <div 
-            className="hotspot" 
-            style={{ top: '69%', left: '53.5%', width: '4%', height: '5%' }}
-            onClick={() => navigate('/robots')}
-          >
-            <span className="hotspot-tooltip">EXPLORE ROBOTS →</span>
+        <div className="landing-content-layer cube-layer">
+          <div className="side-copy-box">
+            <h2>
+              BUILT TO UNDERSTAND<br />
+              THE PHYSICAL WORLD.
+            </h2>
+            <div className="blue-accent-bar" />
+            <p className="highlight-tagline">PRECISION. POWER. PURPOSE. PEACE.</p>
+            <p className="highlight-sub">This is the new era of autonomy-X.</p>
+            <button
+              className="coded-arrow-btn"
+              onClick={() => navigate('/technology')}
+            >
+              DISCOVER TECHNOLOGY <ArrowRight size={15} />
+            </button>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="landing-sec">
-        <img 
-          src="/assets/landing/sec5_factory.webp" 
-          alt="Built for the Real World." 
-          className="landing-sec-img" 
+      {/* SECTION 5: DESIGNED WITHOUT COMPROMISE */}
+      <section className="landing-sec sec-compromise reveal-item" aria-label="Robotics Design Without Compromise">
+        <img
+          src="/assets/landing/sec4_compromise.webp"
+          alt="Antellay-X Bionic Humanoid Chassis"
+          className="landing-sec-img"
+          loading="lazy"
         />
-        <div className="hotspot-overlay">
-          <div 
-            className="hotspot" 
-            style={{ top: '72%', left: '4.2%', width: '3.8%', height: '6%' }}
-            onClick={() => navigate('/technology')}
-          >
-            <span className="hotspot-tooltip">SEE AUTOMATION →</span>
+        <div className="landing-content-layer compromise-layer">
+          <div className="compromise-copy-box">
+            <h2>
+              DESIGNED WITHOUT<br />
+              COMPROMISE.
+            </h2>
+            <div className="blue-accent-bar" />
+            <p>
+              Advanced vision. Human-like dexterity. Intelligence without limits, potential without end.
+            </p>
+            <button
+              className="coded-arrow-btn"
+              onClick={() => navigate('/robots')}
+            >
+              EXPLORE ROBOTS <ArrowRight size={15} />
+            </button>
+          </div>
+
+          <div className="compromise-stepper" aria-label="Robotic feature phases">
+            {['01', '02', '03', '04'].map((num, idx) => (
+              <button
+                key={num}
+                className={`stepper-item ${activeStep === idx ? 'active' : ''}`}
+                onClick={() => setActiveStep(idx)}
+              >
+                <span className="stepper-dot" />
+                <span className="stepper-num">{num}</span>
+              </button>
+            ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="landing-sec">
-        <img 
-          src="/assets/landing/sec6_globe.webp" 
-          alt="One Intelligence. Infinite Possibilities." 
-          className="landing-sec-img" 
+      {/* SECTION 6: BUILT FOR THE REAL WORLD (FACTORY) */}
+      <section className="landing-sec sec-factory reveal-item" aria-label="Industrial Assembly & Automation">
+        <img
+          src="/assets/landing/sec5_factory.webp"
+          alt="Antellay-X Robot in Manufacturing Factory"
+          className="landing-sec-img"
+          loading="lazy"
         />
-        <div className="hotspot-overlay">
-          <div 
-            className="hotspot" 
-            style={{ top: '58%', left: '4%', width: '3.8%', height: '5%' }}
-            onClick={() => navigate('/ecosystem')}
-          >
-            <span className="hotspot-tooltip">EXPLORE ECOSYSTEM →</span>
+        <div className="landing-content-layer factory-layer">
+          <div className="side-copy-box">
+            <h2>
+              BUILT FOR<br />
+              THE REAL WORLD.
+            </h2>
+            <div className="blue-accent-bar" />
+            <p className="factory-tagline">Rugged. Adaptable. Relentless.</p>
+            <p className="factory-sub">Made to solve problems.</p>
+            <button
+              className="coded-arrow-btn"
+              onClick={() => navigate('/technology')}
+            >
+              SEE AUTOMATION <ArrowRight size={15} />
+            </button>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="landing-sec">
-        <img 
-          src="/assets/landing/sec7_dubai.webp" 
-          alt="The Future is Physical." 
-          className="landing-sec-img" 
+      {/* SECTION 7: ONE INTELLIGENCE. INFINITE POSSIBILITIES. (GLOBE) */}
+      <section className="landing-sec sec-globe reveal-item" aria-label="Global Planetary Intelligence">
+        <img
+          src="/assets/landing/sec6_globe.webp"
+          alt="Connected Autonomous Mesh Across Earth"
+          className="landing-sec-img"
+          loading="lazy"
         />
-        <div className="hotspot-overlay">
-          <div 
-            className="hotspot pill" 
-            style={{ top: '60.5%', left: '4.0%', width: '24.5%', height: '12.5%' }}
-            onClick={() => navigate('/mission')}
-            title="Define The Future"
-          >
-            <span className="hotspot-tooltip">ENTER MISSION →</span>
+        <div className="landing-content-layer globe-layer">
+          <div className="side-copy-box">
+            <h2>
+              ONE INTELLIGENCE.<br />
+              INFINITE POSSIBILITIES.
+            </h2>
+            <div className="blue-accent-bar" />
+            <p className="globe-tagline">Connected. Autonomous. Limitless.</p>
+            <p className="globe-sub">The future is unified.</p>
+            <button
+              className="coded-arrow-btn"
+              onClick={() => navigate('/ecosystem')}
+            >
+              EXPLORE ECOSYSTEM <ArrowRight size={15} />
+            </button>
           </div>
         </div>
-      </div>
+      </section>
 
-      <footer className="landing-footer">
-        <div className="landing-footer-brand">
-          ANTELLAY - <span className="brand-x">X</span>
+      {/* SECTION 8: THE FUTURE IS PHYSICAL (DUBAI SKYLINE) */}
+      <section className="landing-sec sec-dubai reveal-item" aria-label="Physical Intelligence Vision">
+        <img
+          src="/assets/landing/sec7_dubai.webp"
+          alt="Antellay-X Robot Standing in Futuristic City at Sunset"
+          className="landing-sec-img"
+          loading="lazy"
+        />
+        <div className="landing-content-layer dubai-layer">
+          <div className="dubai-left-box">
+            <h2>
+              THE FUTURE<br />
+              IS PHYSICAL.
+            </h2>
+            <div className="blue-accent-bar" />
+            <button
+              className="dubai-pill-btn"
+              onClick={() => navigate('/mission')}
+            >
+              DEFINE THE FUTURE <ArrowRight size={15} />
+            </button>
+          </div>
+          <div className="dubai-right-brand">
+            <span>A N T E L L A Y - <span className="brand-x">X</span></span>
+          </div>
         </div>
-
-        <div className="landing-footer-links">
-          <span className="landing-footer-link" onClick={onOpenContact}>CAREERS</span>
-          <span className="landing-footer-link" onClick={onOpenContact}>NEWS</span>
-          <span className="landing-footer-link" onClick={onOpenContact}>INVESTORS</span>
-          <span className="landing-footer-link" onClick={onOpenContact}>CONTACT</span>
-        </div>
-
-        <div className="landing-footer-socials">
-          <span className="landing-social-btn" onClick={onOpenContact}>𝕏</span>
-          <span className="landing-social-btn" onClick={onOpenContact}>in</span>
-          <span className="landing-social-btn" onClick={onOpenContact}>▶</span>
-        </div>
-      </footer>
+      </section>
     </div>
   );
 }
@@ -1091,13 +1228,13 @@ function VisionPage({ onOpenDetail, onOpenContact }) {
             By 2035, Antellay-X will build every type of robot the world needs—empowering every industry, enhancing lives, and shaping the future.
           </p>
           <div className="vision-hero-actions">
-            <button 
+            <button
               className="vision-btn-primary"
               onClick={() => scrollToSection('capabilities-sec')}
             >
               EXPLORE CAPABILITIES <ArrowRight size={14} />
             </button>
-            <button 
+            <button
               className="vision-btn-outline"
               onClick={onOpenContact}
             >
@@ -1108,10 +1245,10 @@ function VisionPage({ onOpenDetail, onOpenContact }) {
 
         <div className="vision-hero-robot-wrap hero-robot-3d-wrap">
           <div className="hero-robot-backlight-glow" />
-          <img 
-            src="/assets/vision/vision_hero_robot.webp" 
-            alt="Antellay-X Vision Humanoid Robot" 
-            className="vision-hero-robot-img hero-robot-3d-img" 
+          <img
+            src="/assets/vision/vision_hero_robot.webp"
+            alt="Antellay-X Vision Humanoid Robot"
+            className="vision-hero-robot-img hero-robot-3d-img"
             loading="eager"
           />
         </div>
@@ -1128,7 +1265,7 @@ function VisionPage({ onOpenDetail, onOpenContact }) {
             <p>
               We are building a world where intelligent machines are designed to amplify the incredible humans to solve, evolve, and elevate across the industrial humanity.
             </p>
-            <button 
+            <button
               className="capabilities-link-btn"
               onClick={() => scrollToSection('industries-sec')}
             >
@@ -1137,7 +1274,7 @@ function VisionPage({ onOpenDetail, onOpenContact }) {
           </div>
 
           <div className="capabilities-cards-row">
-            <div 
+            <div
               className={`cap-card ${activeCap === 0 ? 'active' : ''}`}
               onClick={() => setActiveCap(0)}
             >
@@ -1148,7 +1285,7 @@ function VisionPage({ onOpenDetail, onOpenContact }) {
               <p>Building every type of robot for every real-world need.</p>
             </div>
 
-            <div 
+            <div
               className={`cap-card ${activeCap === 1 ? 'active' : ''}`}
               onClick={() => setActiveCap(1)}
             >
@@ -1159,7 +1296,7 @@ function VisionPage({ onOpenDetail, onOpenContact }) {
               <p>Transforming every industry with intelligent, robust robots.</p>
             </div>
 
-            <div 
+            <div
               className={`cap-card ${activeCap === 2 ? 'active' : ''}`}
               onClick={() => setActiveCap(2)}
             >
@@ -1170,7 +1307,7 @@ function VisionPage({ onOpenDetail, onOpenContact }) {
               <p>Powering lives and unlocking human potential safely.</p>
             </div>
 
-            <div 
+            <div
               className={`cap-card ${activeCap === 3 ? 'active' : ''}`}
               onClick={() => setActiveCap(3)}
             >
@@ -1188,25 +1325,25 @@ function VisionPage({ onOpenDetail, onOpenContact }) {
         <div className="industries-header">
           <h2>One Vision. Infinite Impact.</h2>
           <div className="industry-filters">
-            <button 
+            <button
               className={`industry-filter-pill ${selectedFilter === 'all' ? 'active' : ''}`}
               onClick={() => setSelectedFilter('all')}
             >
               ALL INDUSTRIES ({VISION_INDUSTRIES.length})
             </button>
-            <button 
+            <button
               className={`industry-filter-pill ${selectedFilter === 'industrial' ? 'active' : ''}`}
               onClick={() => setSelectedFilter('industrial')}
             >
               INDUSTRIAL
             </button>
-            <button 
+            <button
               className={`industry-filter-pill ${selectedFilter === 'health' ? 'active' : ''}`}
               onClick={() => setSelectedFilter('health')}
             >
               SERVICES & CARE
             </button>
-            <button 
+            <button
               className={`industry-filter-pill ${selectedFilter === 'frontier' ? 'active' : ''}`}
               onClick={() => setSelectedFilter('frontier')}
             >
@@ -1217,18 +1354,18 @@ function VisionPage({ onOpenDetail, onOpenContact }) {
 
         <div className="industry-grid">
           {filteredIndustries.map((ind, idx) => (
-            <TiltCard 
-              key={ind.id} 
+            <TiltCard
+              key={ind.id}
               className={`reveal-item stagger-${(idx % 5) + 1}`}
               maxAngle={14}
               onClick={() => onOpenDetail(ind)}
             >
               <div className="industry-card card-3d-hover">
                 <div className="industry-card-img-wrap">
-                  <img 
-                    src={ind.image} 
-                    alt={ind.title} 
-                    className="industry-card-img" 
+                  <img
+                    src={ind.image}
+                    alt={ind.title}
+                    className="industry-card-img"
                     loading="lazy"
                   />
                   <div className="industry-card-hover-overlay">
@@ -1245,7 +1382,7 @@ function VisionPage({ onOpenDetail, onOpenContact }) {
         </div>
 
         <div className="industries-cta-wrap">
-          <button 
+          <button
             className="and-more-pill-btn"
             onClick={onOpenContact}
           >
@@ -1262,8 +1399,8 @@ function VisionPage({ onOpenDetail, onOpenContact }) {
 
         <div className="timeline-track-container">
           <div className="timeline-track-line">
-            <div 
-              className="timeline-track-progress" 
+            <div
+              className="timeline-track-progress"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
@@ -1272,8 +1409,8 @@ function VisionPage({ onOpenDetail, onOpenContact }) {
             {TIMELINE_MILESTONES.map((m) => {
               const isActive = m.year === activeTimelineYear;
               return (
-                <div 
-                  key={m.year} 
+                <div
+                  key={m.year}
                   className={`timeline-step ${isActive ? 'active' : ''}`}
                   onClick={() => setActiveTimelineYear(m.year)}
                 >
@@ -1292,8 +1429,8 @@ function VisionPage({ onOpenDetail, onOpenContact }) {
             <h4>Phase {activeMilestoneIndex + 1}: {activeMilestone.phase} ({activeMilestone.year})</h4>
             <p>{activeMilestone.details}</p>
           </div>
-          <button 
-            className="vision-btn-primary" 
+          <button
+            className="vision-btn-primary"
             style={{ padding: '10px 22px', fontSize: '10px', whiteSpace: 'nowrap' }}
             onClick={onOpenContact}
           >
@@ -1302,7 +1439,7 @@ function VisionPage({ onOpenDetail, onOpenContact }) {
         </div>
       </section>
 
-      <section 
+      <section
         className="vision-banner-section"
         style={{ backgroundImage: `url('/assets/vision/vision_banner.webp')` }}
       >
@@ -1313,34 +1450,15 @@ function VisionPage({ onOpenDetail, onOpenContact }) {
               THE FUTURE IS NOT SOMETHING WE WAIT FOR. <br />
               THE FUTURE IS SOMETHING <span className="blue-accent">WE BUILD.</span>
             </h3>
+            <button
+              className="vision-btn-primary"
+              onClick={() => navigate('/mission')}
+            >
+              JOIN OUR MISSION <ArrowRight size={14} />
+            </button>
           </div>
-          <button 
-            className="vision-btn-primary"
-            onClick={() => navigate('/mission')}
-          >
-            JOIN OUR MISSION <ArrowRight size={14} />
-          </button>
         </div>
       </section>
-
-      <footer className="landing-footer">
-        <div className="landing-footer-brand">
-          ANTELLAY - <span className="brand-x">X</span>
-        </div>
-
-        <div className="landing-footer-links">
-          <span className="landing-footer-link" onClick={onOpenContact}>CAREERS</span>
-          <span className="landing-footer-link" onClick={onOpenContact}>NEWS</span>
-          <span className="landing-footer-link" onClick={onOpenContact}>INVESTORS</span>
-          <span className="landing-footer-link" onClick={onOpenContact}>CONTACT</span>
-        </div>
-
-        <div className="landing-footer-socials">
-          <span className="landing-social-btn" onClick={onOpenContact}>𝕏</span>
-          <span className="landing-social-btn" onClick={onOpenContact}>in</span>
-          <span className="landing-social-btn" onClick={onOpenContact}>▶</span>
-        </div>
-      </footer>
     </div>
   );
 }
@@ -1380,13 +1498,13 @@ function TechnologyPage({ onOpenVideo, onOpenDetail, onOpenContact }) {
             Antellay-X technology combines advanced robotics, AI, and systems engineering to build robots that perceive, reason, adapt and perform in the real world.
           </p>
           <div className="tech-hero-actions">
-            <button 
+            <button
               className="vision-btn-primary"
               onClick={() => scrollToSection('tech-pillars-sec')}
             >
               EXPLORE OUR TECH <ArrowRight size={14} />
             </button>
-            <button 
+            <button
               className="vision-btn-outline"
               onClick={onOpenVideo}
             >
@@ -1397,10 +1515,10 @@ function TechnologyPage({ onOpenVideo, onOpenDetail, onOpenContact }) {
 
         <div className="tech-hero-robot-wrap hero-robot-3d-wrap">
           <div className="hero-robot-backlight-glow" />
-          <img 
-            src="/assets/vision/vision_hero_robot.webp" 
-            alt="Antellay-X Advanced Robotics Intelligence" 
-            className="tech-hero-robot-img hero-robot-3d-img" 
+          <img
+            src="/assets/vision/vision_hero_robot.webp"
+            alt="Antellay-X Advanced Robotics Intelligence"
+            className="tech-hero-robot-img hero-robot-3d-img"
             loading="eager"
           />
         </div>
@@ -1428,7 +1546,7 @@ function TechnologyPage({ onOpenVideo, onOpenDetail, onOpenContact }) {
             const isActive = activePillar === p.id;
             return (
               <TiltCard key={p.id} maxAngle={12} className={`reveal-item stagger-${(idx % 6) + 1}`}>
-                <div 
+                <div
                   className={`pillar-card card-3d-hover ${isActive ? 'active' : ''}`}
                   onClick={() => setActivePillar(p.id)}
                 >
@@ -1460,8 +1578,8 @@ function TechnologyPage({ onOpenVideo, onOpenDetail, onOpenContact }) {
               {TECH_STACK_LAYERS.map((layer) => {
                 const isActive = activeLayer === layer.id;
                 return (
-                  <div 
-                    key={layer.id} 
+                  <div
+                    key={layer.id}
                     className={`stack-layer-item ${isActive ? 'active' : ''}`}
                     onClick={() => setActiveLayer(layer.id)}
                   >
@@ -1489,10 +1607,10 @@ function TechnologyPage({ onOpenVideo, onOpenDetail, onOpenContact }) {
           </div>
 
           <div className="tech-stack-right">
-            <img 
-              src="/assets/technology/tech_stack_graphic.webp" 
-              alt="Antellay-X Multi-Layer Architecture Stack" 
-              className="tech-stack-img" 
+            <img
+              src="/assets/technology/tech_stack_graphic.webp"
+              alt="Antellay-X Multi-Layer Architecture Stack"
+              className="tech-stack-img"
               loading="lazy"
             />
           </div>
@@ -1510,10 +1628,10 @@ function TechnologyPage({ onOpenVideo, onOpenDetail, onOpenContact }) {
             <TiltCard key={tech.id} maxAngle={14} className={`reveal-item stagger-${(idx % 5) + 1}`} onClick={() => onOpenDetail(tech)}>
               <div className="tech-feature-card card-3d-hover">
                 <div className="tech-feature-card-img-wrap">
-                  <img 
-                    src={tech.image} 
-                    alt={tech.title} 
-                    className="tech-feature-card-img" 
+                  <img
+                    src={tech.image}
+                    alt={tech.title}
+                    className="tech-feature-card-img"
                     loading="lazy"
                   />
                   <div className="tech-feature-card-overlay">
@@ -1530,7 +1648,7 @@ function TechnologyPage({ onOpenVideo, onOpenDetail, onOpenContact }) {
         </div>
 
         <div className="industries-cta-wrap">
-          <button 
+          <button
             className="and-more-pill-btn"
             onClick={() => onOpenDetail(KEY_TECHNOLOGIES[0])}
           >
@@ -1571,14 +1689,14 @@ function TechnologyPage({ onOpenVideo, onOpenDetail, onOpenContact }) {
       </section>
 
       <section className="tech-banner-section">
-        <img 
-          src="/assets/technology/tech_earth_banner.webp" 
-          alt="Technology with Purpose. Building a Better Tomorrow." 
-          className="tech-banner-img" 
+        <img
+          src="/assets/technology/tech_earth_banner.webp"
+          alt="Technology with Purpose. Building a Better Tomorrow."
+          className="tech-banner-img"
         />
-        <div 
-          className="hotspot" 
-          style={{ 
+        <div
+          className="hotspot"
+          style={{
             position: 'absolute',
             top: '44%',
             left: '42%',
@@ -1591,25 +1709,6 @@ function TechnologyPage({ onOpenVideo, onOpenDetail, onOpenContact }) {
           title="Explore Our Robots"
         />
       </section>
-
-      <footer className="landing-footer">
-        <div className="landing-footer-brand">
-          ANTELLAY - <span className="brand-x">X</span>
-        </div>
-
-        <div className="landing-footer-links">
-          <span className="landing-footer-link" onClick={onOpenContact}>CAREERS</span>
-          <span className="landing-footer-link" onClick={onOpenContact}>NEWS</span>
-          <span className="landing-footer-link" onClick={onOpenContact}>INVESTORS</span>
-          <span className="landing-footer-link" onClick={onOpenContact}>CONTACT</span>
-        </div>
-
-        <div className="landing-footer-socials">
-          <span className="landing-social-btn" onClick={onOpenContact}>𝕏</span>
-          <span className="landing-social-btn" onClick={onOpenContact}>in</span>
-          <span className="landing-social-btn" onClick={onOpenContact}>▶</span>
-        </div>
-      </footer>
     </div>
   );
 }
@@ -1648,13 +1747,13 @@ function RobotsPage({ onOpenVideo, onOpenDetail, onOpenContact }) {
             From humanoids to autonomous machines, we build robots that sense, think, learn and act in the real world.
           </p>
           <div className="robots-hero-actions">
-            <button 
+            <button
               className="vision-btn-primary"
               onClick={() => scrollToSection('robots-fleet-sec')}
             >
               EXPLORE OUR ROBOTS <ArrowRight size={14} />
             </button>
-            <button 
+            <button
               className="vision-btn-outline"
               onClick={onOpenVideo}
             >
@@ -1665,10 +1764,10 @@ function RobotsPage({ onOpenVideo, onOpenDetail, onOpenContact }) {
 
         <div className="robots-hero-img-wrap hero-robot-3d-wrap">
           <div className="hero-robot-backlight-glow" />
-          <img 
-            src="/assets/robots/robots_hero.webp" 
-            alt="Antellay-X Humanoid Robot Profile" 
-            className="robots-hero-img hero-robot-3d-img" 
+          <img
+            src="/assets/robots/robots_hero.webp"
+            alt="Antellay-X Humanoid Robot Profile"
+            className="robots-hero-img hero-robot-3d-img"
             loading="eager"
           />
         </div>
@@ -1692,18 +1791,18 @@ function RobotsPage({ onOpenVideo, onOpenDetail, onOpenContact }) {
 
         <div className="fleet-grid">
           {FLEET_ROBOTS.map((robot, idx) => (
-            <TiltCard 
-              key={robot.id} 
-              maxAngle={14} 
+            <TiltCard
+              key={robot.id}
+              maxAngle={14}
               className={`reveal-item stagger-${(idx % 6) + 1}`}
               onClick={() => onOpenDetail(robot.details)}
             >
               <div className="fleet-card card-3d-hover">
                 <div className="fleet-card-img-wrap">
-                  <img 
-                    src={robot.image} 
-                    alt={robot.title} 
-                    className="fleet-card-img" 
+                  <img
+                    src={robot.image}
+                    alt={robot.title}
+                    className="fleet-card-img"
                     loading="lazy"
                   />
                 </div>
@@ -1720,7 +1819,7 @@ function RobotsPage({ onOpenVideo, onOpenDetail, onOpenContact }) {
         </div>
 
         <div className="industries-cta-wrap">
-          <button 
+          <button
             className="and-more-pill-btn"
             onClick={() => onOpenDetail(ROBOT_DETAILS.humanoid)}
           >
@@ -1738,7 +1837,7 @@ function RobotsPage({ onOpenVideo, onOpenDetail, onOpenContact }) {
               <span className="blue-text">Real-World Impact.</span>
             </h2>
           </div>
-          <button 
+          <button
             className="and-more-pill-btn"
             style={{ padding: '9px 24px', fontSize: '10.5px' }}
             onClick={() => onOpenDetail(ROBOT_DETAILS.humanoid)}
@@ -1752,8 +1851,8 @@ function RobotsPage({ onOpenVideo, onOpenDetail, onOpenContact }) {
             const IconComp = cap.icon;
             const isActive = activeCap === cap.id;
             return (
-              <div 
-                key={cap.id} 
+              <div
+                key={cap.id}
                 className={`robot-cap-card ${isActive ? 'active' : ''}`}
                 onClick={() => setActiveCap(cap.id)}
               >
@@ -1769,10 +1868,10 @@ function RobotsPage({ onOpenVideo, onOpenDetail, onOpenContact }) {
       </section>
 
       <section className="robots-precision-section">
-        <img 
-          src="/assets/robots/robots_factory.webp" 
-          alt="Antellay-X Manufacturing Facility" 
-          className="precision-bg-img" 
+        <img
+          src="/assets/robots/robots_factory.webp"
+          alt="Antellay-X Manufacturing Facility"
+          className="precision-bg-img"
         />
         <div className="precision-content">
           <span className="vision-tag" style={{ color: '#60a5fa' }}>BUILT WITH PRECISION</span>
@@ -1800,17 +1899,17 @@ function RobotsPage({ onOpenVideo, onOpenDetail, onOpenContact }) {
           <p>
             Intelligent machines built to augment human potential and solve real-world challenges at scale.
           </p>
-          <button 
-            className="hotspot pill" 
-            style={{ 
-              background: '#ffffff', 
-              color: '#000000', 
-              padding: '11px 28px', 
-              fontSize: '11px', 
-              fontWeight: '700', 
-              letterSpacing: '2px', 
-              borderRadius: '999px', 
-              border: 'none', 
+          <button
+            className="hotspot pill"
+            style={{
+              background: '#ffffff',
+              color: '#000000',
+              padding: '11px 28px',
+              fontSize: '11px',
+              fontWeight: '700',
+              letterSpacing: '2px',
+              borderRadius: '999px',
+              border: 'none',
               cursor: 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
@@ -1823,32 +1922,13 @@ function RobotsPage({ onOpenVideo, onOpenDetail, onOpenContact }) {
         </div>
 
         <div className="nextgen-right">
-          <img 
-            src="/assets/robots/robots_head_profile.webp" 
-            alt="Next Generation Robot Profile" 
-            className="nextgen-head-img hero-robot-3d-img" 
+          <img
+            src="/assets/robots/robots_head_profile.webp"
+            alt="Next Generation Robot Profile"
+            className="nextgen-head-img hero-robot-3d-img"
           />
         </div>
       </section>
-
-      <footer className="landing-footer">
-        <div className="landing-footer-brand">
-          ANTELLAY - <span className="brand-x">X</span>
-        </div>
-
-        <div className="landing-footer-links">
-          <span className="landing-footer-link" onClick={onOpenContact}>CAREERS</span>
-          <span className="landing-footer-link" onClick={onOpenContact}>NEWS</span>
-          <span className="landing-footer-link" onClick={onOpenContact}>INVESTORS</span>
-          <span className="landing-footer-link" onClick={onOpenContact}>CONTACT</span>
-        </div>
-
-        <div className="landing-footer-socials">
-          <span className="landing-social-btn" onClick={onOpenContact}>𝕏</span>
-          <span className="landing-social-btn" onClick={onOpenContact}>in</span>
-          <span className="landing-social-btn" onClick={onOpenContact}>▶</span>
-        </div>
-      </footer>
     </div>
   );
 }
@@ -1865,26 +1945,26 @@ function PageView({ pageIndex, onOpenVideo, onOpenDetail, onOpenContact }) {
 
   return (
     <div className="page-stage">
-      <img 
-        src={page.image} 
-        alt={page.title} 
-        className="page-image" 
+      <img
+        src={page.image}
+        alt={page.title}
+        className="page-image"
         loading="eager"
       />
 
       <div className="hotspot-overlay">
         {page.id === 'ecosystem' && (
           <>
-            <div 
-              className="hotspot pill" 
+            <div
+              className="hotspot pill"
               style={{ top: '22.3%', left: '8.8%', width: '17%', height: '2.2%' }}
               onClick={() => window.scrollTo({ top: 500, behavior: 'smooth' })}
             >
               <span className="hotspot-tooltip">EXPLORE ARCHITECTURE</span>
             </div>
 
-            <div 
-              className="hotspot pill" 
+            <div
+              className="hotspot pill"
               style={{ top: '94.2%', left: '66%', width: '18%', height: '2.2%' }}
               onClick={() => navigate('/mission')}
             >
@@ -1895,24 +1975,24 @@ function PageView({ pageIndex, onOpenVideo, onOpenDetail, onOpenContact }) {
 
         {page.id === 'company' && (
           <>
-            <div 
-              className="hotspot pill" 
+            <div
+              className="hotspot pill"
               style={{ top: '17.7%', left: '8.8%', width: '12%', height: '2.2%' }}
               onClick={() => window.scrollTo({ top: 480, behavior: 'smooth' })}
             >
               <span className="hotspot-tooltip">READ OUR STORY</span>
             </div>
 
-            <div 
-              className="hotspot" 
+            <div
+              className="hotspot"
               style={{ top: '48.7%', left: '8.8%', width: '15%', height: '1.9%' }}
               onClick={() => window.scrollTo({ top: 720, behavior: 'smooth' })}
             >
               <span className="hotspot-tooltip">EXPLORE LEADERSHIP TEAM</span>
             </div>
 
-            <div 
-              className="hotspot pill" 
+            <div
+              className="hotspot pill"
               style={{ top: '92.9%', left: '8.8%', width: '16%', height: '2.1%' }}
               onClick={() => navigate('/mission')}
             >
@@ -1923,24 +2003,24 @@ function PageView({ pageIndex, onOpenVideo, onOpenDetail, onOpenContact }) {
 
         {page.id === 'mission' && (
           <>
-            <div 
-              className="hotspot pill" 
+            <div
+              className="hotspot pill"
               style={{ top: '25.5%', left: '9.2%', width: '15.5%', height: '2.2%' }}
               onClick={() => window.scrollTo({ top: 550, behavior: 'smooth' })}
             >
               <span className="hotspot-tooltip">EXPLORE OUR FACILITY</span>
             </div>
 
-            <div 
-              className="hotspot pill" 
+            <div
+              className="hotspot pill"
               style={{ top: '25.5%', left: '27.5%', width: '14%', height: '2.2%' }}
               onClick={onOpenVideo}
             >
               <span className="hotspot-tooltip">WATCH FACILITY TOUR</span>
             </div>
 
-            <div 
-              className="hotspot pill" 
+            <div
+              className="hotspot pill"
               style={{ top: '93.5%', left: '74.5%', width: '14.5%', height: '2.3%' }}
               onClick={onOpenContact}
             >
@@ -1967,82 +2047,82 @@ function App() {
 
         <Routes>
           <Route path="/" element={
-            <HomePage 
+            <HomePage
               onOpenVideo={() => setVideoModalOpen(true)}
               onOpenDetail={(d) => setDetailModalData(d)}
               onOpenContact={() => setContactModalOpen(true)}
             />
-          }/>
+          } />
           <Route path="/vision" element={
-            <VisionPage 
+            <VisionPage
               onOpenDetail={(d) => setDetailModalData(d)}
               onOpenContact={() => setContactModalOpen(true)}
             />
-          }/>
+          } />
           <Route path="/technology" element={
-            <TechnologyPage 
+            <TechnologyPage
               onOpenVideo={() => setVideoModalOpen(true)}
               onOpenDetail={(d) => setDetailModalData(d)}
               onOpenContact={() => setContactModalOpen(true)}
             />
-          }/>
+          } />
           <Route path="/robots" element={
-            <RobotsPage 
+            <RobotsPage
               onOpenVideo={() => setVideoModalOpen(true)}
               onOpenDetail={(d) => setDetailModalData(d)}
               onOpenContact={() => setContactModalOpen(true)}
             />
-          }/>
+          } />
           <Route path="/ecosystem" element={
-            <EcosystemPage 
+            <EcosystemPage
               onOpenDetail={(d) => setDetailModalData(d)}
             />
-          }/>
+          } />
           <Route path="/company" element={
-            <CompanyPage 
+            <CompanyPage
               onOpenContact={() => setContactModalOpen(true)}
             />
-          }/>
+          } />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/privacy" element={<LegalPage type="privacy" />} />
           <Route path="/terms" element={<LegalPage type="terms" />} />
           <Route path="/mission" element={
-            <PageView 
-              pageIndex={6} 
+            <MissionPage
               onOpenVideo={() => setVideoModalOpen(true)}
-              onOpenDetail={(d) => setDetailModalData(d)}
               onOpenContact={() => setContactModalOpen(true)}
             />
-          }/>
+          } />
           <Route path="*" element={
-            <HomePage 
+            <HomePage
               onOpenVideo={() => setVideoModalOpen(true)}
               onOpenDetail={(d) => setDetailModalData(d)}
               onOpenContact={() => setContactModalOpen(true)}
             />
-          }/>
+          } />
         </Routes>
 
-        <NavDrawer 
-          isOpen={drawerOpen} 
+        <SiteFooter onOpenContact={() => setContactModalOpen(true)} />
+
+        <NavDrawer
+          isOpen={drawerOpen}
           onClose={() => setDrawerOpen(false)}
           onOpenContact={() => setContactModalOpen(true)}
         />
 
-        <VideoModal 
-          isOpen={videoModalOpen} 
+        <VideoModal
+          isOpen={videoModalOpen}
           onClose={() => setVideoModalOpen(false)}
           onNavigateMission={() => window.location.pathname = '/mission'}
         />
 
-        <DetailModal 
+        <DetailModal
           data={detailModalData}
           onClose={() => setDetailModalData(null)}
           onAction={() => setContactModalOpen(true)}
         />
 
-        <ContactModal 
+        <ContactModal
           isOpen={contactModalOpen}
           onClose={() => setContactModalOpen(false)}
         />
