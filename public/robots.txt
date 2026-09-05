@@ -8,5 +8,4 @@ User-agent: Bingbot
 Allow: /
 
 # Sitemaps
-Sitemap: https://antellay-x.com/sitemap.xml
-Sitemap: https://antellay-x.pages.dev/sitemap.xml
+Sitemap: https://x.antellay.in/sitemap.xml

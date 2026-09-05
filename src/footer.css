@@ -10,6 +10,7 @@
   font-family: var(--font-body, 'DM Sans', sans-serif);
   position: relative;
   overflow: hidden;
+  box-shadow: 0 1000px 0 1000px #04070e;
 }
 
 /* Subtle background accent glow */
@@ -25,6 +26,176 @@
   z-index: 0;
 }
 
+/* Rotating Earth Background Video */
+.footer-earth-bg-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.footer-earth-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: cover;
+  opacity: 0.75;
+  filter: brightness(0.95) contrast(1.15);
+}
+
+.footer-earth-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(4, 7, 14, 0.25) 0%, rgba(4, 7, 14, 0.65) 60%, #04070e 100%),
+              linear-gradient(180deg, rgba(4, 7, 14, 0.6) 0%, rgba(4, 7, 14, 0.15) 35%, rgba(4, 7, 14, 0.2) 65%, rgba(4, 7, 14, 0.8) 100%);
+  pointer-events: none;
+}
+
+/* ====================================================
+   SLIM FOOTER LAYOUT (COMPACT & MODERN)
+   ==================================================== */
+
+.slim-footer-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 34px 5vw 12px 5vw;
+}
+
+.slim-footer-top {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 36px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.slim-brand-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.slim-nav-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: flex-start;
+  padding-top: 6px;
+}
+
+.slim-nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.slim-nav-link {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: left;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+}
+
+.nav-link-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #2674ff;
+  opacity: 0.45;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+.slim-nav-link:hover {
+  color: #ffffff;
+  transform: translateX(6px);
+}
+
+.slim-nav-link:hover .nav-link-dot {
+  opacity: 1;
+  background: #00d2ff;
+  box-shadow: 0 0 10px #00d2ff, 0 0 16px rgba(0, 210, 255, 0.7);
+  transform: scale(1.4);
+}
+
+.mega-brand-logo {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: #ffffff;
+  text-decoration: none;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.mega-brand-logo:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+
+.mega-brand-logo .brand-x {
+  color: #00d2ff;
+  text-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
+  animation: subtleGlowPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes subtleGlowPulse {
+  0% {
+    text-shadow: 0 0 8px rgba(38, 116, 255, 0.4);
+  }
+  100% {
+    text-shadow: 0 0 16px rgba(0, 210, 255, 0.8), 0 0 24px rgba(38, 116, 255, 0.4);
+  }
+}
+
+.mega-social-btn {
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mega-social-btn:hover {
+  transform: translateY(-3px) scale(1.08);
+  border-color: #00d2ff;
+  box-shadow: 0 4px 14px rgba(0, 210, 255, 0.25);
+  color: #ffffff;
+}
+
+.mega-brand-contact-item {
+  transition: all 0.25s ease;
+}
+
+.mega-brand-contact-item:hover {
+  transform: translateX(4px);
+  color: #ffffff;
+}
+
+/* Keep old mega-footer-inner alias for any remaining references */
 .mega-footer-inner {
   position: relative;
   z-index: 1;
@@ -32,6 +203,7 @@
   margin: 0 auto;
   padding: 80px 6vw 36px 6vw;
 }
+
 
 /* ====================================================
    1. NEWSLETTER / UPDATES STRIP
@@ -306,7 +478,8 @@
    ==================================================== */
 .mega-footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding-top: 30px;
+  margin-top: 16px;
+  padding: 32px 0 36px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -317,7 +490,8 @@
 }
 
 .mega-copyright {
-  color: #64748b;
+  color: #8899b5;
+  letter-spacing: 0.01em;
 }
 
 .mega-status-pill {
@@ -419,5 +593,39 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 14px;
+  }
+}
+
+/* ANTELLAY Labs clickable link in copyright */
+.mega-labs-link {
+  color: #4d90ff;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+.mega-labs-link:hover {
+  color: #79aaff;
+}
+
+/* Slim footer responsive */
+@media (max-width: 860px) {
+  .slim-footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+  .slim-brand-col {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 520px) {
+  .slim-footer-top {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .slim-brand-col {
+    grid-column: span 1;
   }
 }

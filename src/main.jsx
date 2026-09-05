@@ -604,13 +604,11 @@ function SS1Header({ onOpenDrawer }) {
   }, []);
 
   const navLinks = [
-    { path: '/about', label: 'ABOUT' },
     { path: '/vision', label: 'VISION' },
     { path: '/technology', label: 'TECHNOLOGY' },
     { path: '/robots', label: 'ROBOTS' },
     { path: '/ecosystem', label: 'ECOSYSTEM' },
     { path: '/company', label: 'COMPANY' },
-    { path: '/contact', label: 'CONTACT' },
   ];
 
   return (
@@ -881,7 +879,7 @@ function HomePage({ onOpenVideo, onOpenDetail, onOpenContact }) {
   const [activeStep, setActiveStep] = useState(0);
 
   useEffect(() => {
-    document.title = 'ANTELLAY-X | Autonomy. Redefined.';
+    document.title = 'X-ANTELLAY';
     window.scrollTo(0, 0);
   }, []);
 

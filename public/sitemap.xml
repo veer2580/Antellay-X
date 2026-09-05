@@ -6,7 +6,7 @@
 
   <!-- Home Page -->
   <url>
-    <loc>https://antellay-x.com/</loc>
+    <loc>https://x.antellay.in/</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.00</priority>
@@ -14,7 +14,7 @@
 
   <!-- Vision -->
   <url>
-    <loc>https://antellay-x.com/vision</loc>
+    <loc>https://x.antellay.in/vision</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
@@ -22,7 +22,7 @@
 
   <!-- Technology -->
   <url>
-    <loc>https://antellay-x.com/technology</loc>
+    <loc>https://x.antellay.in/technology</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
@@ -30,7 +30,7 @@
 
   <!-- Robots Fleet -->
   <url>
-    <loc>https://antellay-x.com/robots</loc>
+    <loc>https://x.antellay.in/robots</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
@@ -38,7 +38,7 @@
 
   <!-- Mission -->
   <url>
-    <loc>https://antellay-x.com/mission</loc>
+    <loc>https://x.antellay.in/mission</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
@@ -46,7 +46,7 @@
 
   <!-- Ecosystem -->
   <url>
-    <loc>https://antellay-x.com/ecosystem</loc>
+    <loc>https://x.antellay.in/ecosystem</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
@@ -54,7 +54,7 @@
 
   <!-- Company -->
   <url>
-    <loc>https://antellay-x.com/company</loc>
+    <loc>https://x.antellay.in/company</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
@@ -62,7 +62,7 @@
 
   <!-- About -->
   <url>
-    <loc>https://antellay-x.com/about</loc>
+    <loc>https://x.antellay.in/about</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
@@ -70,7 +70,7 @@
 
   <!-- Contact -->
   <url>
-    <loc>https://antellay-x.com/contact</loc>
+    <loc>https://x.antellay.in/contact</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
@@ -78,14 +78,14 @@
 
   <!-- Legal & Privacy -->
   <url>
-    <loc>https://antellay-x.com/privacy</loc>
+    <loc>https://x.antellay.in/privacy</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.30</priority>
   </url>
 
   <url>
-    <loc>https://antellay-x.com/terms</loc>
+    <loc>https://x.antellay.in/terms</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.30</priority>

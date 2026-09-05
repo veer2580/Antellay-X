@@ -554,6 +554,7 @@
   height: 100%;
   min-height: 540px;
   object-fit: cover;
+  object-position: center top;
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 

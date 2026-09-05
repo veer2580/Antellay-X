@@ -1,0 +1,224 @@
+[
+  {
+    "slug": "privacy",
+    "category": "Data Protection & Privacy",
+    "title": "Privacy Policy",
+    "summary": "This Privacy Policy describes how Antellay-X collects, uses, protects, and discloses personal information obtained through our websites, autonomous robotics platforms, cloud systems, and related enterprise services.",
+    "version": "2.4",
+    "effectiveDate": "January 2026",
+    "sourcePages": "1 – 8",
+    "sections": [
+      {
+        "id": "overview",
+        "number": "01",
+        "title": "Introduction & Scope",
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Antellay-X ('we', 'us', or 'our') is committed to protecting your personal data and upholding high standards of privacy and security. This Privacy Policy applies to all users of https://x.antellay.in, our client portals, physical AI developer interfaces, and enterprise robotics management systems."
+          },
+          {
+            "type": "paragraph",
+            "text": "By accessing or using our services, you acknowledge that you have read, understood, and agreed to the practices described in this document."
+          }
+        ]
+      },
+      {
+        "id": "information-collection",
+        "number": "02",
+        "title": "Information We Collect",
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "We collect information to provide, maintain, and optimize our physical AI systems and client partnerships. The categories of data we collect include:"
+          },
+          {
+            "type": "list",
+            "items": [
+              "Direct Contact Details: Name, corporate email address, organization name, telephone number, and job title provided via inquiry and meeting forms.",
+              "Enterprise Project Requirements: Technical specifications, operational environment parameters, robotics fleet deployment needs, and facility requirements.",
+              "Telemetry & Operational Data: Non-personal system metrics, edge sensor diagnostics, latency analytics, and hardware performance data from connected robot platforms.",
+              "Technical Web Data: IP address, browser type, device identifiers, session timestamps, and navigation behavior collected via essential performance cookies."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "data-usage",
+        "number": "03",
+        "title": "How We Use Your Information",
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Antellay-X processes collected data strictly for legitimate business purposes, contract fulfillment, and product optimization. Specifically, we use your data to:"
+          },
+          {
+            "type": "list",
+            "items": [
+              "Respond to corporate inquiries, schedule technological demonstrations, and fulfill enterprise partnership requests.",
+              "Deliver, configure, and maintain autonomous physical AI systems and fleet management portals.",
+              "Continuously improve neural perception models, edge actuation precision, and system safety protocols.",
+              "Maintain legal compliance, prevent malicious intrusion, and enforce platform security safeguards."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "data-sharing",
+        "number": "04",
+        "title": "Information Sharing & Third Parties",
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "We do not sell, rent, or trade personal information to third parties for marketing purposes. Data is only disclosed under strict confidentiality in the following circumstances:"
+          },
+          {
+            "type": "list",
+            "items": [
+              "Authorized Service Providers: Trusted cloud hosting, infrastructure monitoring, and communications partners bound by rigorous data protection agreements.",
+              "Corporate Affiliates: Entities within the Celebso Group under unified enterprise privacy and security governance.",
+              "Legal & Regulatory Requirements: When required by law, subpoena, or valid regulatory enforcement actions to protect system integrity and public safety."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "security-retention",
+        "number": "05",
+        "title": "Data Security & Retention",
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "We implement state-of-the-art administrative, technical, and physical safeguards designed to prevent unauthorized access, loss, destruction, or alteration of personal data. All data transmissions are encrypted using TLS 1.3, and resting data is safeguarded with AES-256 encryption."
+          },
+          {
+            "type": "paragraph",
+            "text": "Personal data is retained only for as long as necessary to fulfill the purposes outlined in this policy, satisfy contractual obligations, or comply with statutory retention requirements."
+          }
+        ]
+      },
+      {
+        "id": "user-rights",
+        "number": "06",
+        "title": "Your Rights & Choices",
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Depending on your jurisdiction (including GDPR, CCPA/CPRA, and applicable data privacy regulations), you have rights regarding your personal data:"
+          },
+          {
+            "type": "list",
+            "items": [
+              "Right to Access: Request a copy of the personal information we maintain about you.",
+              "Right to Correction: Request prompt correction of inaccurate or incomplete records.",
+              "Right to Deletion: Request the erasure of your personal data when no longer needed for lawful purposes.",
+              "Right to Restrict or Object: Restrict processing or opt out of non-essential communications at any time."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "terms",
+    "category": "Legal & Compliance",
+    "title": "Terms of Service",
+    "summary": "These Terms of Service govern your access to and use of the Antellay-X website, physical AI documentation, robotics developer tools, and related technological offerings.",
+    "version": "3.1",
+    "effectiveDate": "January 2026",
+    "sourcePages": "1 – 10",
+    "sections": [
+      {
+        "id": "agreement-to-terms",
+        "number": "01",
+        "title": "Agreement to Terms",
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "These Terms of Service ('Terms') constitute a legally binding agreement between you ('User', 'Client', or 'you') and Antellay-X, a Celebso Group company. By accessing our website, portal, or associated interfaces, you agree to be bound by these Terms."
+          },
+          {
+            "type": "paragraph",
+            "text": "If you are using our services on behalf of an organization or enterprise, you represent and warrant that you have full legal authority to bind that entity to these Terms."
+          }
+        ]
+      },
+      {
+        "id": "intellectual-property",
+        "number": "02",
+        "title": "Intellectual Property Rights",
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "All materials, software, designs, algorithms, robotic architectures, blueprints, graphics, audio, video, trademarks, and logos on this website are the exclusive intellectual property of Antellay-X and protected under international copyright and patent laws."
+          },
+          {
+            "type": "list",
+            "items": [
+              "No Unauthorized Reproduction: You may not copy, modify, distribute, reverse-engineer, decompile, or create derivative works without express written consent.",
+              "Proprietary Trademarks: 'Antellay-X', 'X-ANTELLAY', 'Autonomy. Redefined.', and associated logos are registered trademarks of Antellay-X.",
+              "Limited License: Users are granted a limited, revocable, non-exclusive license solely to view public informational content for evaluation purposes."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "acceptable-use",
+        "number": "03",
+        "title": "Acceptable Use & Conduct",
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "You agree to use our digital assets, documentation, and contact interfaces exclusively for lawful and legitimate purposes. You explicitly agree not to:"
+          },
+          {
+            "type": "list",
+            "items": [
+              "Deploy automated scrapers, crawlers, or data extraction scripts against our services without prior authorization.",
+              "Attempt unauthorized access to any system, server, database, robotic telemetry endpoint, or private network.",
+              "Submit false, misleading, defamatory, or malicious information through meeting, inquiry, or partnership forms.",
+              "Introduce viruses, worms, trojans, or logic bombs designed to disrupt physical AI systems or cloud infrastructure."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "disclaimer-liability",
+        "number": "04",
+        "title": "Disclaimers & Limitation of Liability",
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Website content, technical previews, and specifications are provided on an 'as-is' and 'as-available' basis. Antellay-X disclaims all warranties, express or implied, including fitness for a particular purpose and non-infringement."
+          },
+          {
+            "type": "paragraph",
+            "text": "In no event shall Antellay-X or its officers, directors, or employees be liable for any indirect, consequential, punitive, or special damages arising out of or in connection with the use of this website or preview materials."
+          }
+        ]
+      },
+      {
+        "id": "governing-law",
+        "number": "05",
+        "title": "Governing Law & Dispute Resolution",
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "These Terms shall be governed by and construed in accordance with the laws of India, without regard to its conflict of law principles. Any dispute, controversy, or claim arising out of or relating to these Terms shall be subject to the exclusive jurisdiction of the competent courts in Jaipur, Rajasthan, India."
+          }
+        ]
+      },
+      {
+        "id": "modifications",
+        "number": "06",
+        "title": "Updates & Modifications",
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "We reserve the right to modify, amend, or replace these Terms at our discretion. The updated version will be indicated by an updated 'Effective Date' at the top of this document. Your continued use of the website following any changes constitutes acceptance of the new Terms."
+          }
+        ]
+      }
+    ]
+  }
+]
