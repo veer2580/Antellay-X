@@ -66,7 +66,7 @@ export default function SiteFooter({ onOpenContact }) {
 
             <div className="mega-social-links">
               <a href="https://x.com" target="_blank" rel="noreferrer" className="mega-social-btn" aria-label="Antellay-X on X">X</a>
-              <a href="https://www.linkedin.com/company/grehni-ai/posts/?feedView=all" target="_blank" rel="noreferrer" className="mega-social-btn" aria-label="Antellay-X on LinkedIn">in</a>
+              <a href="https://www.linkedin.com/company/a-n-t-e-l-l-a-y-x/posts/?feedView=all" target="_blank" rel="noreferrer" className="mega-social-btn" aria-label="Antellay-X on LinkedIn">in</a>
               <a href="https://youtube.com" target="_blank" rel="noreferrer" className="mega-social-btn" aria-label="Antellay-X on YouTube">▶</a>
               <a href="https://github.com" target="_blank" rel="noreferrer" className="mega-social-btn" aria-label="Antellay-X on GitHub">gh</a>
             </div>
@@ -120,7 +120,7 @@ export default function SiteFooter({ onOpenContact }) {
           <div className="mega-copyright">
             © {new Date().getFullYear()}{' '}
             <a
-              href="https://www.linkedin.com/company/grehni-ai/posts/?feedView=all"
+              href="https://www.linkedin.com/company/a-n-t-e-l-l-a-y-x/posts/?feedView=all"
               target="_blank"
               rel="noreferrer"
               className="mega-labs-link"
