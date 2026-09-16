@@ -120,14 +120,23 @@ export default function SiteFooter({ onOpenContact }) {
           <div className="mega-copyright">
             © {new Date().getFullYear()}{' '}
             <a
-              href="https://www.linkedin.com/company/a-n-t-e-l-l-a-y-x/posts/?feedView=all"
+              href="https://antellay.in/"
               target="_blank"
               rel="noreferrer"
               className="mega-labs-link"
             >
               ANTELLAY Labs
             </a>
-            . All Rights Reserved. A Celebso Group Company.
+            . All Rights Reserved. A{' '}
+            <a
+              href="https://celebso.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="mega-labs-link"
+            >
+              Celebso Group
+            </a>{' '}
+            Company.
           </div>
 
           <div className="mega-bottom-links">

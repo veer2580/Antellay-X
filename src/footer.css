@@ -596,17 +596,18 @@
   }
 }
 
-/* ANTELLAY Labs clickable link in copyright */
+/* ANTELLAY Labs & Celebso Group clickable links in copyright */
 .mega-labs-link {
   color: #4d90ff;
   font-weight: 700;
   text-decoration: none;
   letter-spacing: 0.02em;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
   cursor: pointer;
 }
 .mega-labs-link:hover {
   color: #79aaff;
+  text-shadow: 0 0 8px rgba(77, 144, 255, 0.4);
 }
 
 /* Slim footer responsive */
